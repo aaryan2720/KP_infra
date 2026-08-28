@@ -1,0 +1,14 @@
+# Secure HTTP Response Headers for Apache Server
+<IfModule mod_headers.c>
+  # 1. Prevent MIME type sniffing
+  Header set X-Content-Type-Options "nosniff"
+
+  # 2. Prevent clickjacking (same origin framing only)
+  Header set X-Frame-Options "SAMEORIGIN"
+
+  # 3. Control referrer information sent with requests
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # 4. Mitigate XSS and resource injection (Content Security Policy)
+  Header set Content-Security-Policy "default-src 'self' https:; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https:; script-src 'self' 'unsafe-inline' https:; frame-src 'self' https://www.google.com https://www.google.com/maps/;"
+</IfModule>
