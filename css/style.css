@@ -1172,7 +1172,16 @@ span.client-font {
 
 .footer-bottom a {
   color: var(--gold);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.25s ease, text-decoration 0.25s ease;
 }
+
+.footer-bottom a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
 
 .value-item {
   padding: 32px 28px;
@@ -1595,4 +1604,419 @@ span.client-font {
     flex: 0 0 auto;
     width: 20%;
   }
+}
+
+/* ==========================================================================
+   Brand Integration: KP Infrastructure × Tiger Infra & Laxman Pakhale Foundation
+   ========================================================================== */
+
+/* 1. Header Brand Lockup */
+.nav-brand-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.nav-brand-lockup .nav-logo-primary {
+  height: 40px;
+  width: auto;
+  display: block;
+  transition: transform 0.25s ease;
+}
+
+.nav-brand-lockup .nav-lockup-divider {
+  display: inline-block;
+  font-family: var(--font-serif, 'Playfair Display', Georgia, serif);
+  font-size: 1.15rem;
+  font-weight: 300;
+  color: var(--gold, #C8A96E);
+  opacity: 0.85;
+  line-height: 1;
+  user-select: none;
+}
+
+.nav-brand-lockup .nav-logo-secondary {
+  height: 34px;
+  width: auto;
+  max-width: 140px;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.25s ease;
+}
+
+.nav-brand-lockup:hover .nav-logo-primary,
+.nav-brand-lockup:hover .nav-logo-secondary {
+  transform: translateY(-1px);
+}
+
+@media (max-width: 767px) {
+  .nav-brand-lockup {
+    gap: 8px;
+  }
+  .nav-brand-lockup .nav-logo-primary {
+    height: 32px;
+  }
+  .nav-brand-lockup .nav-lockup-divider {
+    font-size: 0.95rem;
+  }
+  .nav-brand-lockup .nav-logo-secondary {
+    height: 26px;
+    max-width: 110px;
+  }
+}
+
+@media (max-width: 400px) {
+  .nav-brand-lockup {
+    gap: 6px;
+  }
+  .nav-brand-lockup .nav-logo-primary {
+    height: 28px;
+  }
+  .nav-brand-lockup .nav-logo-secondary {
+    height: 22px;
+    max-width: 95px;
+  }
+}
+
+/* 2. First-Visit Launch Pop-Up Modal */
+.brand-launch-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 99998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 16px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.brand-launch-modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.brand-launch-modal .launch-backdrop {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 30%, rgba(24, 18, 30, 0.94) 0%, rgba(8, 7, 10, 0.97) 100%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  cursor: pointer;
+}
+
+.brand-launch-modal .launch-card {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 640px;
+  max-height: min(90vh, 760px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: linear-gradient(165deg, #1b1724 0%, #131018 45%, #0b0a0e 100%);
+  border: 1px solid rgba(200, 169, 110, 0.3);
+  border-radius: 20px;
+  padding: 42px 36px 36px;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.85), 0 0 50px rgba(106, 27, 154, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  text-align: center;
+  color: #ffffff;
+  transform: scale(0.94) translateY(18px);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.brand-launch-modal.show .launch-card {
+  transform: scale(1) translateY(0);
+}
+
+/* Custom Sleek Scrollbar for Modal Card */
+.brand-launch-modal .launch-card::-webkit-scrollbar {
+  width: 6px;
+}
+.brand-launch-modal .launch-card::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+.brand-launch-modal .launch-card::-webkit-scrollbar-thumb {
+  background: rgba(200, 169, 110, 0.4);
+  border-radius: 10px;
+}
+
+.brand-launch-modal .launch-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  z-index: 10;
+}
+
+.brand-launch-modal .launch-close-btn:hover,
+.brand-launch-modal .launch-close-btn:focus-visible {
+  background: rgba(200, 169, 110, 0.25);
+  border-color: var(--gold, #C8A96E);
+  color: #ffffff;
+  transform: rotate(90deg);
+  outline: none;
+}
+
+/* Modal Content Styling */
+.launch-header-lockup {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(200, 169, 110, 0.2);
+  border-radius: 50px;
+  padding: 8px 24px;
+  margin-bottom: 20px;
+}
+
+.launch-header-lockup .lockup-kp {
+  height: 38px;
+  width: auto;
+  display: block;
+}
+
+.launch-header-lockup .lockup-times {
+  font-family: var(--font-serif, 'Playfair Display', Georgia, serif);
+  font-size: 1.15rem;
+  color: var(--gold, #C8A96E);
+  opacity: 0.9;
+  user-select: none;
+}
+
+.launch-header-lockup .lockup-tiger {
+  height: 32px;
+  width: auto;
+  max-width: 140px;
+  object-fit: contain;
+  display: block;
+}
+
+.launch-headline {
+  font-family: var(--font-serif, 'Playfair Display', Georgia, serif);
+  font-size: clamp(1.45rem, 4vw, 2.05rem);
+  font-weight: 700;
+  line-height: 1.22;
+  letter-spacing: 0.03em;
+  color: #ffffff;
+  margin: 0 0 6px;
+}
+
+.launch-subheadline {
+  font-size: 0.82rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold, #C8A96E);
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.launch-divider {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold, #C8A96E), transparent);
+  margin: 0 auto 24px;
+}
+
+.launch-foundation-block {
+  background: radial-gradient(ellipse at center, rgba(106, 27, 154, 0.2) 0%, rgba(20, 15, 28, 0) 75%);
+  padding: 10px 14px 18px;
+  border-radius: 16px;
+  margin-bottom: 22px;
+}
+
+.foundation-intro-label {
+  display: inline-block;
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(200, 169, 110, 0.95);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.launch-foundation-logo {
+  max-height: 115px;
+  width: auto;
+  max-width: 85%;
+  object-fit: contain;
+  margin: 0 auto 14px;
+  display: block;
+  filter: drop-shadow(0 6px 18px rgba(106, 27, 154, 0.35));
+}
+
+.launch-foundation-title {
+  font-family: var(--font-serif, 'Playfair Display', Georgia, serif);
+  font-size: 1.18rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #ffffff;
+  margin: 0 0 10px;
+}
+
+.launch-foundation-desc {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 500px;
+  margin: 0 auto 8px;
+}
+
+.launch-foundation-motto {
+  font-size: 0.82rem;
+  font-style: italic;
+  color: rgba(200, 169, 110, 0.95);
+  margin: 0 auto;
+}
+
+.launch-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 32px;
+  background: linear-gradient(135deg, #C8A96E 0%, #B38E4A 100%);
+  color: #121016;
+  font-weight: 700;
+  font-size: 0.84rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-radius: 6px;
+  text-decoration: none;
+  border: none;
+  box-shadow: 0 8px 24px rgba(200, 169, 110, 0.35);
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.launch-cta-btn:hover,
+.launch-cta-btn:focus-visible {
+  background: #ffffff;
+  color: #0d0c10;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(200, 169, 110, 0.5);
+  outline: none;
+}
+
+@media (max-width: 576px) {
+  .brand-launch-modal .launch-card {
+    padding: 34px 20px 24px;
+    border-radius: 16px;
+  }
+  .launch-header-lockup {
+    gap: 10px;
+    padding: 6px 16px;
+    margin-bottom: 16px;
+  }
+  .launch-header-lockup .lockup-kp {
+    height: 30px;
+  }
+  .launch-header-lockup .lockup-tiger {
+    height: 24px;
+    max-width: 105px;
+  }
+  .launch-foundation-logo {
+    max-height: 90px;
+  }
+  .launch-cta-btn {
+    width: 100%;
+    padding: 12px 20px;
+  }
+}
+
+/* 3. Footer Foundation Reference */
+.footer-foundation-col {
+  position: relative;
+}
+
+.footer-foundation-card {
+  background: linear-gradient(150deg, rgba(32, 22, 44, 0.55) 0%, rgba(18, 14, 26, 0.75) 100%);
+  border: 1px solid rgba(142, 68, 173, 0.3);
+  border-radius: 12px;
+  padding: 18px 16px;
+  text-align: center;
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.footer-foundation-card:hover {
+  border-color: rgba(200, 169, 110, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(106, 27, 154, 0.25);
+}
+
+.footer-foundation-card .foundation-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold, #C8A96E);
+  background: rgba(200, 169, 110, 0.12);
+  border: 1px solid rgba(200, 169, 110, 0.25);
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.footer-foundation-card .foundation-logo-wrap {
+  margin-bottom: 10px;
+}
+
+.footer-foundation-card .footer-foundation-logo {
+  max-height: 52px;
+  width: auto;
+  max-width: 140px;
+  object-fit: contain;
+  display: inline-block;
+  filter: drop-shadow(0 2px 8px rgba(106, 27, 154, 0.3));
+}
+
+.footer-foundation-card .foundation-title {
+  font-family: var(--font-serif, 'Playfair Display', Georgia, serif);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #ffffff;
+  margin: 0 0 6px;
+}
+
+.footer-foundation-card .foundation-tagline {
+  font-size: 0.74rem;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0 0 12px;
+}
+
+.footer-foundation-card .foundation-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold, #C8A96E);
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.footer-foundation-card .foundation-link:hover {
+  color: #ffffff;
+  transform: translateX(3px);
 }

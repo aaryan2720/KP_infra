@@ -188,3 +188,82 @@ function animateCounter(el) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 })();
+
+/* ==========================================================================
+   Brand Launch Pop-Up Controller
+   ========================================================================== */
+(function () {
+  var modal = document.getElementById('brandLaunchModal');
+  if (!modal) return;
+
+  var closeBtn = modal.querySelector('.launch-close-btn');
+  var backdrop = modal.querySelector('.launch-backdrop');
+  var ctaBtn = modal.querySelector('#launchDiscoverBtn');
+
+  function showModal() {
+    setTimeout(function () {
+      modal.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }, 450);
+  }
+
+  function closeModal() {
+    modal.classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
+  // Show as soon as loader finishes or document is ready
+  var loader = document.getElementById('bc-loader');
+  if (loader) {
+    var checkInterval = setInterval(function () {
+      if (loader.classList.contains('bc-loader--hidden') || !document.body.contains(loader)) {
+        clearInterval(checkInterval);
+        showModal();
+      }
+    }, 100);
+    // Fallback safety timeout
+    setTimeout(function () {
+      clearInterval(checkInterval);
+      if (!modal.classList.contains('show')) showModal();
+    }, 3000);
+  } else {
+    if (document.readyState === 'complete') {
+      showModal();
+    } else {
+      window.addEventListener('load', showModal, { once: true });
+    }
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      closeModal();
+    });
+  }
+
+  if (backdrop) {
+    backdrop.addEventListener('click', function (e) {
+      e.preventDefault();
+      closeModal();
+    });
+  }
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && modal.classList.contains('show')) {
+      closeModal();
+    }
+  });
+
+  if (ctaBtn) {
+    ctaBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      closeModal();
+      var foundationTarget = document.getElementById('foundation');
+      if (foundationTarget) {
+        setTimeout(function () {
+          foundationTarget.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 350);
+      }
+    });
+  }
+})();
