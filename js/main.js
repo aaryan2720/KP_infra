@@ -65,24 +65,66 @@ function animateCounter(el) {
 (function () {
   var form = document.getElementById('contactForm');
   if (!form) return;
-  form.addEventListener('submit', function (e) {
+  form.addEventListener('submit', async function (e) {
     e.preventDefault();
     var btn = form.querySelector('button[type="submit"]');
     var orig = btn.textContent;
     btn.textContent = 'Sending…';
     btn.disabled = true;
-    setTimeout(function () {
-      btn.textContent = 'Message Sent ✓';
-      btn.style.background = '#3A7A3A';
+
+    var payload = {
+      fname: (document.getElementById('fname') || {}).value || '',
+      lname: (document.getElementById('lname') || {}).value || '',
+      email: (document.getElementById('email') || {}).value || '',
+      phone: (document.getElementById('phone') || {}).value || '',
+      service: (document.getElementById('service') || {}).value || '',
+      budget: (document.getElementById('budget') || {}).value || '',
+      timeline: (document.getElementById('timeline') || {}).value || '',
+      message: (document.getElementById('message') || {}).value || ''
+    };
+
+    try {
+      var res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      var data = await res.json().catch(function () { return {}; });
+
+      if (res.ok && data.success) {
+        btn.textContent = 'Message Sent ✓';
+        btn.style.background = '#2E7D32';
+        btn.style.borderColor = '#2E7D32';
+        btn.style.color = '#fff';
+        form.reset();
+        setTimeout(function () {
+          btn.textContent = orig;
+          btn.style.background = '';
+          btn.style.borderColor = '';
+          btn.style.color = '';
+          btn.disabled = false;
+        }, 3500);
+      } else {
+        throw new Error(data.error || 'Failed to send message.');
+      }
+    } catch (err) {
+      console.error('Contact Form Error:', err);
+      btn.textContent = 'Failed to send — Please try again';
+      btn.style.background = '#C62828';
+      btn.style.borderColor = '#C62828';
       btn.style.color = '#fff';
-      form.reset();
       setTimeout(function () {
         btn.textContent = orig;
         btn.style.background = '';
+        btn.style.borderColor = '';
         btn.style.color = '';
         btn.disabled = false;
-      }, 3000);
-    }, 1400);
+      }, 3500);
+    }
   });
 
   const track = document.querySelector('.clients-track');

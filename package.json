@@ -1,0 +1,13 @@
+{
+  "name": "kp-infrastructure",
+  "version": "1.0.0",
+  "private": true,
+  "description": "K.P. Infrastructure Construction Website",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vercel dev"
+  },
+  "dependencies": {
+    "nodemailer": "^6.9.16"
+  }
+}
