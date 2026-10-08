@@ -29,12 +29,12 @@ module.exports = async (req, res) => {
       });
     }
 
-    const host = process.env.SMTP_HOST || 'smtp.gmail.com';
+    const host = (process.env.SMTP_HOST || 'smtp.gmail.com').trim();
     const port = Number(process.env.SMTP_PORT) || 465;
     const secure = process.env.SMTP_SECURE === 'true' || port === 465;
-    const user = process.env.SMTP_USER;
-    const pass = process.env.SMTP_PASS;
-    const receiver = process.env.CONTACT_RECEIVER_EMAIL || 'info@kpinfrastructure.com';
+    const user = (process.env.SMTP_USER || '').trim();
+    const pass = (process.env.SMTP_PASS || '').trim().replace(/\s+/g, '');
+    const receiver = (process.env.CONTACT_RECEIVER_EMAIL || 'info@kpinfrastructure.com').trim();
     const from = process.env.CONTACT_FROM_EMAIL || `"K.P. Infrastructure" <${user || 'info@kpinfrastructure.com'}>`;
 
     if (!user || !pass) {
